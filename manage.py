@@ -1,4 +1,5 @@
 from flask_script import Manager,Server
+from app import create_app
 
 
 
@@ -17,10 +18,9 @@ manager.add_command('server', Server)
 #     tests = unittest.TestLoader().discover('tests')
 #     unittest.TextTestRunner(verbosity=2).run(tests)
 #
-# @manager.shell
-# def make_shell_context():
-#     return dict(app = app )
-
+@manager.shell
+def make_shell_context():
+    return dict(app = app)
 
 
 if __name__ == '__main__':
