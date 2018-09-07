@@ -4,7 +4,9 @@ class Config:
     '''
     Configuration of our app features
     '''
-    pass
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://username:password@localhost/pitch'
+
+
 
 class ProdConfig(Config):
     '''
