@@ -4,7 +4,7 @@ class Config:
     '''
     Configuration of our app features
     '''
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://raskwesi.dev@gmail.com:Makonnen14@localhost/pitch'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://kwesi:OnnenOfori14@localhost/pitch'
 
 
 
