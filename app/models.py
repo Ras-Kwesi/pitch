@@ -1,10 +1,16 @@
-from . import db
+from . import db, login_manager
 from werkzeug.security import generate_password_hash,check_password_hash
 from flask_login import UserMixin
+from datetime import datetime
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 # Class for the table that manages users,
-class User(db.Model):
+class User(db.Model,UserMixin):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(255), index=True)
@@ -12,7 +18,7 @@ class User(db.Model):
     email = db.Column(db.String(255), unique=True, index=True)
     bio = db.Column(db.String(255))
     pass_key = db.Column(db.String(255))
-    pitch_id = db.Column(db.Integer, db.ForeignKey('pitches.id'))
+    pitch_poster = db.Column(db.Integer, db.ForeignKey('pitches.id'))
 
     @property
     def password(self):
@@ -20,10 +26,10 @@ class User(db.Model):
 
     @password.setter
     def password(self, password):
-        self.pass_secure = generate_password_hash(password)
+        self.pass_key = generate_password_hash(password)
 
     def verify_password(self, password):
-        return check_password_hash(self.pass_secure, password)
+        return check_password_hash(self.pass_key, password)
 
 
 
@@ -42,6 +48,8 @@ class Pitches(db.Model):
     pitch = db.Column(db.String(255))
     user_id = db.relationship('User', backref='pitch', lazy="dynamic")
     category_id = db.relationship('Category', backref='pitch', lazy="dynamic")
+    posted = db.Column(db.DateTime, default=datetime.utcnow)
+    the_comment = db.Column(db.Integer, db.ForeignKey('comments.id'))
 
 
 
@@ -58,7 +66,11 @@ class Pitches(db.Model):
 class Comments(db.Model):
     __tablename__="comments"
     id = db.Column(db.Integer, primary_key=True)
-    pitch = db.Column(db.String)
+    comment = db.Column(db.String)
+    pitch_comment = db.relationship('Pitches', backref='comment', lazy="dynamic")
+
+
+
 
 
     def save_comment(self):
