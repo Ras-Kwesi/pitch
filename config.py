@@ -12,19 +12,20 @@ class ProdConfig(Config):
     '''
     Class that sets app to run of production mode
     '''
-    pass
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://kwesi:OnnenOfori14@localhost/pitch'
 
 class DevConfig(Config):
     """
     Class this sets app to run on development mode
     """
-    pass
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://kwesi:OnnenOfori14@localhost/pitch'
+    DEBUG = True
 
 class TestConfig(Config):
     '''
     Class that sets app to run on test mode
     '''
-    pass
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://kwesi:OnnenOfori14@localhost/pitch'
 
 config_options = {
 'development':DevConfig,
