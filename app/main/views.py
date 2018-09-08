@@ -1,5 +1,6 @@
 from flask import render_template,request,redirect,url_for,abort,flash
 from . import main
+from ..models import User,Comments,Category,Pitches
 
 
 # Views for our templates
@@ -62,11 +63,12 @@ def new_comments():
 
     return render_template('')
 
-@main.route('/profile/')
-def profile():
-    '''
-    View the profile page of a user
-    '''
+@main.route('/user/<uname>')
+def profile(uname):
+    user = User.query.filter_by(username = uname).first()
 
-    return render_template('')
+    if user is None:
+        abort(404)
+
+    return render_template("profile/profile.html", user = user)
 

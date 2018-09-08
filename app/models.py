@@ -18,6 +18,7 @@ class User(db.Model,UserMixin):
     email = db.Column(db.String(255), unique=True, index=True)
     bio = db.Column(db.String(255))
     pass_key = db.Column(db.String(255))
+    profile_pic_path = db.Column(db.String())
     pitch_poster = db.Column(db.Integer, db.ForeignKey('pitches.id'))
 
     @property
