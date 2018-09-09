@@ -29,13 +29,18 @@ def categories(category):
     return render_template('')
 
 
-@main.route('/pitch/')
+@main.route('/pitch/<int:id>')
 def pitch():
     '''
     View function to view a pitch
     '''
+    pitch = Pitches.query.get(id)
+    if review is None:
+        abort(404)
 
-    return render_template('')
+    the_pitch = markdown2.markdown(pitch.movie_review, extras=["code-friendly", "fenced-code-blocks"])
+
+    return render_template('pitch.html',pitch = pitch, the_pitch = the_pitch)
 
 
 
@@ -77,9 +82,7 @@ def new_comments():
 
     title = 'What do you think about that pitch? '
 
-
-
-    return render_template('new_comment.html',title = title,comment_form = form )
+    return render_template('new_comment.html',title = title,form=comment_form)
 
 @main.route('/user/<uname>')
 def profile(uname):
