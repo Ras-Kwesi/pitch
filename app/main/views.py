@@ -1,8 +1,8 @@
 from flask import render_template,request,redirect,url_for,abort,flash
 from . import main
 from ..models import User,Comments,Category,Pitches
-from .. import db
-from .forms import ReviewForm,UpdateProfile
+from .. import db,photos
+from .forms import UpdateProfile ,NewPitch
 from flask_login import login_user,logout_user,login_required
 
 
@@ -39,15 +39,22 @@ def pitch():
 
 
 
-@main.route('/pitch/add/')
+@main.route('/pitch/add', methods = ['GET','POST'])
 def new_pitch():
     '''
     View function to create a new pitch
     '''
+    form = NewPitch()
+    if form.validate_on_submit():
+        new_pitch = (Pitches(title = form.title.data,
+                             pitch = form.pitch.data,), 'Category(category = form.category.data)')
+        # new_category =
+        new_pitch.save_pitch()
+        return redirect(url_for('main.index'))
 
+    title = "I have a Pitch"
 
-
-    return render_template("")
+    return render_template('new_pitch.html', title = title, pitch_form = form)
 
 
 @main.route('/comments/')
@@ -94,3 +101,13 @@ def update_profile(uname):
 
     return render_template('profile/update.html',form =form)
 
+@main.route('/user/<uname>/update/pic',methods= ['POST'])
+@login_required
+def update_pic(uname):
+    user = User.query.filter_by(username = uname).first()
+    if 'photo' in request.files:
+        filename = photos.save(request.files['photo'])
+        path = f'photos/{filename}'
+        user.profile_pic_path = path
+        db.session.commit()
+    return redirect(url_for('main.profile',uname=uname))
