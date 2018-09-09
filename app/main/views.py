@@ -75,9 +75,11 @@ def new_comments():
     if comment_form.validate_on_submit():
         new_comment = Comments(comment=comment_form.comment.data)
 
+    title = 'What do you think about that pitch? '
 
 
-    return render_template('')
+
+    return render_template('new_comment.html',title = title,comment_form = form )
 
 @main.route('/user/<uname>')
 def profile(uname):
