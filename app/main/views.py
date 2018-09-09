@@ -2,7 +2,7 @@ from flask import render_template,request,redirect,url_for,abort,flash
 from . import main
 from ..models import User,Comments,Category,Pitches
 from .. import db,photos
-from .forms import UpdateProfile ,NewPitch
+from .forms import UpdateProfile ,NewPitch, NewComment
 from flask_login import login_user,logout_user,login_required
 
 
@@ -70,6 +70,12 @@ def new_comments():
     '''
     View function to create a new comment to a pitch
     '''
+
+    comment_form = NewComment()
+    if comment_form.validate_on_submit():
+        new_comment = Comments(comment=comment_form.comment.data)
+
+
 
     return render_template('')
 
