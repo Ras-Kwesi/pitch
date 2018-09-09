@@ -61,7 +61,7 @@ class Pitches(db.Model):
 
     @classmethod
     def get_pitchs(cls, id):
-        pitches = Pitches.query.filter_by(movie_id=id).all()
+        pitches = Pitches.query.filter_by(poster=id).all()
         return pitches
 
 
@@ -82,6 +82,6 @@ class Comments(db.Model):
 
     @classmethod
     def get_comments(cls, id):
-        comments = Comments.query.filter_by(movie_id=id).all()
+        comments = Comments.query.filter_by(pitch_comment=id).all()
         return comments
 

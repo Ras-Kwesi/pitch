@@ -4,7 +4,7 @@ from ..models import User,Comments,Category,Pitches
 from .. import db,photos
 from .forms import UpdateProfile ,NewPitch, NewComment
 from flask_login import login_user,logout_user,login_required
-
+import markdown2
 
 # Views for our templates
 @main.route('/')
@@ -13,9 +13,9 @@ def index():
     View function to render the index html template
     '''
 
+    categories = Category.query.all()
 
-
-    return render_template('index.html',)
+    return render_template('index.html',categories = categories)
 
 
 @main.route('/category/')
@@ -35,12 +35,13 @@ def pitch():
     View function to view a pitch
     '''
     pitch = Pitches.query.get(id)
-    if review is None:
+    if pitch is None:
         abort(404)
 
     the_pitch = markdown2.markdown(pitch.movie_review, extras=["code-friendly", "fenced-code-blocks"])
+    commentss = Comments.query.all()
 
-    return render_template('pitch.html',pitch = pitch, the_pitch = the_pitch)
+    return render_template('pitch.html',pitch = pitch, the_pitch = the_pitch, comments = commentss)
 
 
 
@@ -62,24 +63,19 @@ def new_pitch():
     return render_template('new_pitch.html', title = title, pitch_form = form)
 
 
-@main.route('/comments/')
-def comments():
-    '''
-    View function to display comments to a pitch
-    '''
 
-    return render_template('')
 
 @main.route('/comments/new/')
-def new_comments():
+def new_comments(id):
     '''
     View function to create a new comment to a pitch
     '''
-
+    pitch = Pitches.query.filter_by(id=id).first()
     comment_form = NewComment()
     if comment_form.validate_on_submit():
         new_comment = Comments(comment=comment_form.comment.data)
 
+        new_comment.save_comment()
     title = 'What do you think about that pitch? '
 
     return render_template('new_comment.html',title = title,form=comment_form)
