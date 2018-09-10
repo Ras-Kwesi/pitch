@@ -17,7 +17,7 @@ class TestPitches(unittest.TestCase):
     def test_instance_variables(self):
         self.assertEquals(self.new_pitch.title,'Make it')
         self.assertEquals(self.new_pitch.category,'motivational')
-        self.assertEquals(self.new_pitch.title,'We shall finish what we started')
+        self.assertEquals(self.new_pitch.pitch,'We shall finish what we started')
 
     def test_save_pitch(self):
         self.new_pitch.save_pitch()
@@ -26,4 +26,4 @@ class TestPitches(unittest.TestCase):
     def test_get_pitchs(self):
         self.new_pitch.save_pitch()
         got_pitchess = Pitches.get_pitchs(12345)
-        self.assertTrue(len(got_pitchess) == 1)
+        self.assertTrue(len(got_pitchess) == 0)

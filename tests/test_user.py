@@ -6,6 +6,9 @@ class UserModelTest(unittest.TestCase):
     def setUp(self):
         self.new_user = User(password = 'power')
 
+    def tearDown(self):
+        User.query.delete()
+
     def test_password_setter(self):
         self.assertTrue(self.new_user.pass_key is not None)
 
