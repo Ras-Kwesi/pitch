@@ -23,11 +23,14 @@ class ProdConfig(Config):
     '''
     Class that sets app to run of production mode
     '''
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
+    pass
 
 class DevConfig(Config):
     """
     Class this sets app to run on development mode
     """
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://kwesi:OnnenOfori14@localhost/pitch'
 
     DEBUG = True
 
