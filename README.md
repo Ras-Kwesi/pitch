@@ -11,7 +11,7 @@ As a user I would like:
 * Get to see various sources to select a newsfeed from.
 * Get to see news articles from the various news sources
 
-#Behaviours
+##Behaviours
 |  Behaviour |  Input   |   Output    |  
 | :--------------------- | :-------------------------: | ----------------------------------:|
 |Display Pitches | **Landing Page** |List of pitches is displayed|
