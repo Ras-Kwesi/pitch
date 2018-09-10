@@ -20,12 +20,16 @@
 
 <!--<div class="col-md-6">-->
     {% for pitch in pitchess %}
-    <div class="col-md-6">
-        <div class="card">
-            <h1 class ='card-title'>{{pitch.title}}</h1>
-            <p class="card-text">{{pitch.pitch}}</p>
-            <p class="card-text">{{pitch.posted}}</p>
-            <a class="btn btn-primary" href="/pitch/{{pitch.id}}">More Details</a>
+    <div class="container-fluid">
+        <div class="card bg-light mb-3" style="max-width: 18rem;">
+            <div class="card">
+                <h1 class ='card-title'>{{pitch.title}}</h1>
+                <div class="card-body">
+                <p class="card-text">{{pitch.pitch}}</p>
+                <p class="card-text">{{pitch.posted}}</p>
+                <a class="btn btn-primary" href="/pitch/{{pitch.id}}">More Details</a>
+                </div>
+            </div>
         </div>
     </div>
     {% endfor %}
