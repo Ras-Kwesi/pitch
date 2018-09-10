@@ -50,7 +50,7 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="html" value="1299" />
-          <entry key="md" value="1039" />
+          <entry key="md" value="1040" />
           <entry key="py" value="4886" />
           <entry key="sh" value="5" />
           <entry key="txt" value="6" />
@@ -60,7 +60,7 @@
         <counts>
           <entry key="Bash" value="5" />
           <entry key="HTML" value="1299" />
-          <entry key="Markdown" value="1039" />
+          <entry key="Markdown" value="1040" />
           <entry key="PLAIN_TEXT" value="6" />
           <entry key="Python" value="4886" />
         </counts>
@@ -233,7 +233,7 @@
               <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
                 <state split_layout="SPLIT">
                   <first_editor relative-caret-position="225">
-                    <caret line="15" column="91" selection-start-line="15" selection-start-column="91" selection-end-line="15" selection-end-column="91" />
+                    <caret line="15" column="92" selection-start-line="15" selection-start-column="92" selection-end-line="15" selection-end-column="92" />
                   </first_editor>
                   <second_editor />
                 </state>
@@ -760,7 +760,7 @@
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="225">
-            <caret line="15" column="91" selection-start-line="15" selection-start-column="91" selection-end-line="15" selection-end-column="91" />
+            <caret line="15" column="92" selection-start-line="15" selection-start-column="92" selection-end-line="15" selection-end-column="92" />
           </first_editor>
           <second_editor />
         </state>

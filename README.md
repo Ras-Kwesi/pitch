@@ -13,7 +13,7 @@ As a user I would like:
 
 #Behaviours
 |  Behaviour |  Input   |   Output    |  
-| :--------------------- | :-------------------------: | ----------------------------------|
+| :--------------------- | :-------------------------: | ----------------------------------:|
 |Display Pitches | **Landing Page** |List of pitches is displayed|
 |Display Category of Pitch | **Category Page** | Pitches of certain category are displayed|
 |New Pitch is input | **New Pitch Page** |Markdown form to add new pitch|
