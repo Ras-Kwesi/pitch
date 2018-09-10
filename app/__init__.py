@@ -11,7 +11,7 @@ from flask_simplemde import SimpleMDE
 
 
 
-bootstrap = Bootstrap()
+bootstrap=Bootstrap()
 db = SQLAlchemy()
 login_manager = LoginManager()
 login_manager.session_protection = 'strong'
