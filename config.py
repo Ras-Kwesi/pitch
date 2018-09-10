@@ -23,7 +23,7 @@ class ProdConfig(Config):
     '''
     Class that sets app to run of production mode
     '''
-
+    SQLALCHEMY_DATABASE_URI = os.environ.get("DATABASE_URL")
 
 class DevConfig(Config):
     """
