@@ -18,7 +18,7 @@ class User(db.Model,UserMixin):
     email = db.Column(db.String(255), unique=True, index=True)
     bio = db.Column(db.String(255))
     pass_key = db.Column(db.String(255))
-    profile_pic_path = db.Column(db.String())
+    profile_pic_path = db.Column(db.String(255))
     user_pitch = db.relationship('Pitches', backref='user', lazy='dynamic')
 
     @property
@@ -63,7 +63,7 @@ class Pitches(db.Model):
 class Comments(db.Model):
     __tablename__="comments"
     id = db.Column(db.Integer, primary_key=True)
-    comment = db.Column(db.String)
+    comment = db.Column(db.String(255))
     pitch_comment = db.Column(db.Integer, db.ForeignKey('pitches.id'))
 
 
