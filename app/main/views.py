@@ -12,7 +12,6 @@ def index():
     '''
     View function to render the index html template
     '''
-    category = Pitches.category
     pitchess = Pitches.query.all()
 
     return render_template('index.html',pitchess = pitchess)
@@ -27,7 +26,7 @@ def categories(cat_input):
 
 
 
-    return render_template('pitch.html',category = category_list)
+    return render_template('categories.html',category = category_list)
 
 
 @main.route('/pitch/<int:id>')
@@ -54,12 +53,12 @@ def new_pitch():
     '''
     form = NewPitch()
     if form.validate_on_submit():
-        new_pitch = Pitches(title = form.title.data,
-                             pitch = form.pitch.data,
-                            category = form.category.data)
-        # new_category =
+
+
+        new_pitch = Pitches(title = form.title.data,pitch = form.a_pitch.data,category = form.category.data)
+
         new_pitch.save_pitch()
-        return redirect(url_for('main.pitch'))
+        return redirect(url_for('main.index'))
 
     title = "I Pitch"
 
