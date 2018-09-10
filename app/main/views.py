@@ -12,8 +12,8 @@ def index():
     '''
     View function to render the index html template
     '''
-
-    pitchess = Pitches.query.all()
+    category = Pitches.category
+    pitchess = Pitches.query.filter_by(category).all()
 
     return render_template('index.html',pitchess = pitchess)
 
@@ -47,19 +47,21 @@ def pitch(id):
 
 
 @main.route('/pitch/add', methods = ['GET','POST'])
+@login_required
 def new_pitch():
     '''
     View function to create a new pitch
     '''
     form = NewPitch()
     if form.validate_on_submit():
-        new_pitch = (Pitches(title = form.title.data,
-                             pitch = form.pitch.data,), 'Category(category = form.category.data)')
+        new_pitch = Pitches(title = form.title.data,
+                             pitch = form.pitch.data,
+                            category = form.category.data)
         # new_category =
         new_pitch.save_pitch()
         return redirect(url_for('main.index'))
 
-    title = "I have a Pitch"
+    title = "I Pitch"
 
     return render_template('new_pitch.html', title = title, pitch_form = form)
 
@@ -67,6 +69,7 @@ def new_pitch():
 
 
 @main.route('/comments/new/')
+@login_required
 def new_comments(id):
     '''
     View function to create a new comment to a pitch
@@ -82,6 +85,7 @@ def new_comments(id):
     return render_template('new_comment.html',title = title,form=comment_form)
 
 @main.route('/user/<uname>')
+@login_required
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
 
