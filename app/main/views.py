@@ -1,6 +1,6 @@
 from flask import render_template,request,redirect,url_for,abort,flash
 from . import main
-from ..models import User,Comments,Category,Pitches
+from ..models import User,Comments,Pitches
 from .. import db,photos
 from .forms import UpdateProfile ,NewPitch, NewComment
 from flask_login import login_user,logout_user,login_required
@@ -13,9 +13,9 @@ def index():
     View function to render the index html template
     '''
 
-    categories = Category.query.all()
+    pitchess = Pitches.query.all()
 
-    return render_template('index.html',categories = categories)
+    return render_template('index.html',pitchess = pitchess)
 
 
 @main.route('/category/')
@@ -23,22 +23,23 @@ def categories(category):
     '''
     view function to display the pitches of our specific category
     '''
+    category_list = Pitches.query.filter_by(category = category).all()
 
 
 
-    return render_template('')
+    return render_template('pitch.html',category = category_list)
 
 
 @main.route('/pitch/<int:id>')
-def pitch():
+def pitch(id):
     '''
     View function to view a pitch
     '''
-    pitch = Pitches.query.get(id)
-    if pitch is None:
+    the_pitch = Pitches.query.get(id)
+    if the_pitch is None:
         abort(404)
 
-    the_pitch = markdown2.markdown(pitch.movie_review, extras=["code-friendly", "fenced-code-blocks"])
+    the_pitches = markdown2.markdown(the_pitch.pitch, extras=["code-friendly", "fenced-code-blocks"])
     commentss = Comments.query.all()
 
     return render_template('pitch.html',pitch = pitch, the_pitch = the_pitch, comments = commentss)

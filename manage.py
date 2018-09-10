@@ -1,7 +1,7 @@
 from flask_script import Manager,Server
 from app import create_app,db
 from  flask_migrate import Migrate, MigrateCommand
-from app.models import User,Pitches,Category,Comments
+from app.models import User,Pitches,Comments
 
 
 app = create_app('development') # Instantiating our app, and assigning it to development mode

@@ -35,11 +35,6 @@ class User(db.Model,UserMixin):
 
 
 
-class Category(db.Model):
-    __tablename__= 'categories'
-    id = db.Column(db.Integer, primary_key=True)
-    category = db.Column(db.String(255))
-    pitch_cat = db.Column(db.Integer, db.ForeignKey('pitches.id'))
 
 
 
@@ -48,7 +43,7 @@ class Pitches(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255))
     pitch = db.Column(db.String(255))
-    category_id = db.relationship('Category', backref='pitch', lazy="dynamic")
+    category = db.Column(db.String(255))
     posted = db.Column(db.DateTime, default=datetime.utcnow)
     the_comment = db.relationship('Comments', backref='pitch', lazy="dynamic")
     poster = db.Column(db.Integer, db.ForeignKey('users.id'))
