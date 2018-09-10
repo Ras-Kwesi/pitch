@@ -3,7 +3,7 @@ from . import main
 from ..models import User,Comments,Pitches
 from .. import db,photos
 from .forms import UpdateProfile ,NewPitch, NewComment
-from flask_login import login_user,logout_user,login_required
+from flask_login import login_required
 import markdown2
 
 # Views for our templates
@@ -13,17 +13,17 @@ def index():
     View function to render the index html template
     '''
     category = Pitches.category
-    pitchess = Pitches.query.filter_by(category).all()
+    pitchess = Pitches.query.all()
 
     return render_template('index.html',pitchess = pitchess)
 
 
-@main.route('/category/')
-def categories(category):
+@main.route('/category/<cat_input>')
+def categories(cat_input):
     '''
     view function to display the pitches of our specific category
     '''
-    category_list = Pitches.query.filter_by(category = category).all()
+    category_list = Pitches.query.filter_by(category = cat_input)
 
 
 
@@ -59,7 +59,7 @@ def new_pitch():
                             category = form.category.data)
         # new_category =
         new_pitch.save_pitch()
-        return redirect(url_for('main.index'))
+        return redirect(url_for('main.pitch'))
 
     title = "I Pitch"
 
@@ -68,13 +68,13 @@ def new_pitch():
 
 
 
-@main.route('/comments/new/')
+@main.route('/pitch/new_comment/<id>', methods = ['GET','POST'])
 @login_required
 def new_comments(id):
     '''
     View function to create a new comment to a pitch
     '''
-    pitch = Pitches.query.filter_by(id=id).first()
+    pitch = Pitches.query.filter_by(id=id)
     comment_form = NewComment()
     if comment_form.validate_on_submit():
         new_comment = Comments(comment=comment_form.comment.data)

@@ -17,11 +17,11 @@
           Categories
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">Pick-Up Lines</a>
-            <a class="dropdown-item" href="#">Interview Pitch</a>
-            <a class="dropdown-item" href="#">Product Pitch</a>
-            <a class="dropdown-item" href="#">Promotion Pitch</a>
-            <a class="dropdown-item" href="#">Collaboration Pitch</a>
+            <a class="dropdown-item" href="/category/Pick Up Lines">Pick Up Lines</a>
+            <a class="dropdown-item" href="/category/Interview Pitch">Interview Pitch</a>
+            <a class="dropdown-item" href="/category/Product Pitch">Product Pitch</a>
+            <a class="dropdown-item" href="/category/Promotion Pitch">Promotion Pitch</a>
+            <a class="dropdown-item" href="/category/Collaboration Pitch">Collaboration Pitch</a>
           <div class="dropdown-divider"></div>
           <a class="dropdown-item" href="#">Something else here</a>
         </div>
@@ -30,17 +30,18 @@
         <a class="nav-link disabled" href="#">Disabled</a>
       </li>
     </ul>
-    <ul class="nav navbar-nav navbar-right">
-      {% if current_user.is_authenticated %}
-      <li style="color:white;padding:15px;">{{current_user.username}}</li>
-      <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
-      {% else %}
-      <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
-      {%endif%}
-    </ul>
+    <!--<ul class="nav navbar-nav navbar-right">-->
+      <!--{% if current_user.is_authenticated %}-->
+      <!--<li style="color:white;padding:15px;">{{current_user.username}}</li>-->
+      <!--<li><a href="{{url_for('auth.logout')}}">Sign out</a></li>-->
+      <!--{% else %}-->
+      <!--<li><a href="{{url_for('auth.login')}}">Sign in</a></li>-->
+      <!--{%endif%}-->
+    <!--</ul>-->
     <ul class="nav navbar-nav navbar-right">
       {% if current_user.is_authenticated %}
       <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a></li>
+      <div></div>
       <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
       {% else %}
       <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
